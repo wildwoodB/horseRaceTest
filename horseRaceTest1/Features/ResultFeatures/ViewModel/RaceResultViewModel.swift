@@ -12,18 +12,19 @@ class RaceResultViewModel: ObservableObject {
     
     @Published var history: [RaceResult] = []
     
-    private var cancellables: AnyCancellable?
+    private var cancellables = Set<AnyCancellable>()
     private let storageService = StorageService()
     
     init(winnerPublisher: AnyPublisher<Horse?, Never>) {
         
         history = storageService.loadRaceResults()
         
-        cancellables = winnerPublisher
+        winnerPublisher
             .compactMap { $0 }
             .sink { [weak self] horse in
                 self?.appendResult(for: horse)
             }
+            .store(in: &cancellables)
     }
     
     private func appendResult(for horse: Horse) {

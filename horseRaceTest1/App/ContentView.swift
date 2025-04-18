@@ -9,7 +9,7 @@ import SwiftUI
 
 struct ContentView: View {
     
-    @StateObject private var raceVM = HorseRaceViewModel()
+    @StateObject private var raceVM: HorseRaceViewModel
     @StateObject private var historyVM: RaceResultViewModel
     
     init() {
