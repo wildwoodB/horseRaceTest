@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct ContentView: View {
+    
     @StateObject private var raceVM = HorseRaceViewModel()
     @StateObject private var historyVM: RaceResultViewModel
     
@@ -20,10 +21,14 @@ struct ContentView: View {
     var body: some View {
         TabView {
             HorseRaceView(viewModel: raceVM)
-                .tabItem { Label("Гонка", systemImage: "hare") }
+                .tabItem {
+                    Label("Гонка", systemImage: "hare")
+                }
             
             RaceResultView(viewModel: historyVM)
-                .tabItem { Label("История", systemImage: "clock") }
+                .tabItem {
+                    Label("История", systemImage: "clock")
+                }
         }
     }
 }
